@@ -60,6 +60,26 @@ npm.cmd run dev
 
 Open http://localhost:5173. Vite proxies `/api` to http://localhost:8080. See [frontend configuration](frontend/README.md#configuration-and-api-integration) for `VITE_API_URL` and `API_PROXY_TARGET`. Refreshing the page signs you out because tokens are kept only in memory.
 
+### Use Neon instead of local PostgreSQL
+
+The optional root Neon configuration declares PostgreSQL only; existing Spring Security/JWT authentication and local image storage are preserved.
+
+From the workspace root, after linking your own Neon project with `neon init`:
+
+```powershell
+npm.cmd ci
+neon deploy
+npm.cmd run backend:neon
+```
+
+Neon writes secrets to ignored `.env.local` (or `.env` if it exists). The backend launcher reads that file and converts the pooled `DATABASE_URL` to JDBC credentials. Flyway uses `DATABASE_URL_UNPOOLED` through a separate direct connection. The PostgreSQL JDBC driver and JPA remain in use; the browser never receives database credentials. The `neon` profile uses a small Hikari pool with zero minimum idle connections.
+
+In a second terminal, run `npm.cmd run dev` from the root and open http://localhost:5173. Root `npm.cmd run build` builds the frontend. The launcher generates a temporary JWT signing key unless you set `JWT_SECRET` securely; restarting with a new key invalidates existing tokens.
+
+This connects the backend to Neon; `neon deploy` does not host the Spring Boot application or React frontend. Uploaded photo bytes still live in the configured local directory. A Cloud Run deployment needs persistent image storage configured separately.
+
+For an isolated real-database verification, create a disposable branch named `sportmarket-neon-verification`, pull its environment to `.env.neon-verification`, build the backend with `mvn package`, then run `node scripts/verify-neon.mjs .env.neon-verification`. The check creates fictional accounts/listings, tests ownership and CRUD, restarts the backend to prove persistence, and deletes its listing. It refuses write tests on other branches. `--read-only` skips API mutations but application startup still applies pending Flyway migrations.
+
 ## Try the complete flow
 
 1. Browse gear, combine filters, and open a listing's gallery.
@@ -84,7 +104,7 @@ npm.cmd run build
 python -m unittest discover -s scripts -p 'test_*.py'
 ```
 
-Verified locally: **89 backend tests, 31 frontend tests, and 5 deployment/demo-tool tests pass**. The frontend production build passes. Screenshots exercise the built frontend with a real isolated Spring Boot backend. H2 tests do not replace a PostgreSQL deployment smoke test. CI also builds the deployment container; local container builds need Docker Desktop running.
+Verified locally: **89 backend tests, 31 frontend tests, 5 deployment/demo-tool tests, and 3 Neon configuration tests pass**. The frontend production build passes. Live Neon verification also covers Flyway V1-V4, registration/login, CRUD, ownership, and persistence across backend restarts on an isolated branch; public reads are smoke-tested on the linked production branch. CI also builds the deployment container; local container builds need Docker Desktop running.
 
 ## Engineering decisions and limits
 
