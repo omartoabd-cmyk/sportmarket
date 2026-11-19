@@ -1,0 +1,10 @@
+.gcloudignore
+.git/
+#!include:.gitignore
+docs/
+**/.env*
+**/.neon
+**/node_modules/
+**/target/
+**/.qa/
+**/*.log

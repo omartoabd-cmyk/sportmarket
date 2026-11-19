@@ -80,6 +80,14 @@ This connects the backend to Neon; `neon deploy` does not host the Spring Boot a
 
 For an isolated real-database verification, create a disposable branch named `sportmarket-neon-verification`, pull its environment to `.env.neon-verification`, build the backend with `mvn package`, then run `node scripts/verify-neon.mjs .env.neon-verification`. The check creates fictional accounts/listings, tests ownership and CRUD, restarts the backend to prove persistence, and deletes its listing. It refuses write tests on other branches. `--read-only` skips API mutations but application startup still applies pending Flyway migrations.
 
+### Cloud Run
+
+From a fresh checkout in Google Cloud Shell, run `bash deploy/cloud-run.sh YOUR_PROJECT_ID`. This creates a public SportMarket web service, a private Cloud Storage photo bucket, and a Secret Manager configuration. Google Cloud usage charges may apply; it does not create Cloud SQL.
+
+The script prompts privately for Neon connection strings with pooling on and off if no local Neon env file exists. It builds the root Dockerfile, enables the `production,neon` profiles, and prints the service URL after checking the homepage and categories API. Existing JWT signing keys are preserved on redeploy. Keep credentials out of chat, shell command arguments, and Git.
+
+Cloud configuration tests run with `npm.cmd run test:neon-config`. Actual Google Cloud permissions, image startup, photo uploads, and persistence must be verified after deploying; local tests cannot verify the live cloud environment. The storage mount uses Cloud Storage FUSE, which has different filesystem semantics from a local disk; test upload/delete and photo survival across redeploys before sharing the demo.
+
 ## Try the complete flow
 
 1. Browse gear, combine filters, and open a listing's gallery.
