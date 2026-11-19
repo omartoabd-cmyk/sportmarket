@@ -1,0 +1,11 @@
+.git
+.m2
+.vscode
+**/node_modules
+**/target
+**/dist
+**/.qa
+**/.env*
+**/*.log
+docs
+scripts

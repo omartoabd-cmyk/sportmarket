@@ -1,0 +1,16 @@
+[
+  {"title":"Match-day soccer ball", "category":"Soccer", "price":24.99,"condition":"GOOD","description":"Size 5 training ball with plenty of games left. Holds air well. Fictional demonstration listing."},
+  {"title":"Indoor basketball", "category":"Basketball", "price":32.00,"condition":"LIKE_NEW","description":"Full-size indoor basketball with a comfortable grip. Fictional demonstration listing."},
+  {"title":"Weekend tennis racket", "category":"Tennis", "price":65.00,"condition":"GOOD","description":"Lightweight racket for casual matches. Fresh grip and protective cover. Fictional demonstration listing."},
+  {"title":"Adjustable dumbbell pair", "category":"Fitness", "price":110.00,"condition":"GOOD","description":"Compact pair for a home training setup. Fictional demonstration listing."},
+  {"title":"Youth hockey training puck set", "category":"Hockey", "price":18.00,"condition":"NEW","description":"Six practice pucks for shooting drills. Fictional demonstration listing."},
+  {"title":"Practice baseball bundle", "category":"Baseball", "price":22.50,"condition":"GOOD","description":"Three baseballs ready for throwing practice. Fictional demonstration listing."},
+  {"title":"Outdoor training cones", "category":"Other", "price":15.00,"condition":"LIKE_NEW","description":"Bright cones for agility sessions and team drills. Fictional demonstration listing."},
+  {"title":"Training soccer ball", "category":"Soccer", "price":19.00,"condition":"FAIR","description":"Reliable ball for the park, with visible signs of use. Fictional demonstration listing."},
+  {"title":"Outdoor basketball", "category":"Basketball", "price":27.00,"condition":"GOOD","description":"Durable ball for outdoor courts. Fictional demonstration listing."},
+  {"title":"Tennis practice balls", "category":"Tennis", "price":12.00,"condition":"NEW","description":"Three practice balls for your next session. Fictional demonstration listing."},
+  {"title":"Compact workout weights", "category":"Fitness", "price":45.00,"condition":"LIKE_NEW","description":"A simple starter set for home workouts. Fictional demonstration listing."},
+  {"title":"Hockey practice pucks", "category":"Hockey", "price":9.00,"condition":"GOOD","description":"Spare pucks for training at the rink. Fictional demonstration listing."},
+  {"title":"Baseball warmup set", "category":"Baseball", "price":16.00,"condition":"FAIR","description":"Used balls for backyard warmups. Fictional demonstration listing."},
+  {"title":"Agility cone kit", "category":"Other", "price":20.00,"condition":"NEW","description":"Portable markers for a quick training circuit. Fictional demonstration listing."}
+]
