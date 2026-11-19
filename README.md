@@ -2,11 +2,11 @@
 
 A full-stack marketplace that gives sports equipment a second life. Browse and filter gear, create an account, and manage listings with product photos and backend ownership checks.
 
-**React Â· TypeScript Â· Java 21 Â· Spring Boot 4.1.2 Â· PostgreSQL**
+**React | TypeScript | Java 21 | Spring Boot 4.1.2 | PostgreSQL**
 
 ![SportMarket marketplace with fictional demo listings](docs/screenshots/marketplace.png)
 
-Screenshots use an isolated demo database and original equipment illustrations, with no real accounts or private listings. Deployment configuration is prepared; a live URL will be added after publishing.
+Screenshots use an isolated demo database and original equipment illustrations, with no real accounts or private listings. Run the application locally using the instructions below.
 
 ## Features
 
@@ -16,7 +16,7 @@ Screenshots use an isolated demo database and original equipment illustrations, 
 - Up to five validated JPEG, PNG, or WebP photos per listing, selection previews, and a gallery.
 - Responsive layouts and helpful loading, empty, validation, and error states.
 
-[Listing details](docs/screenshots/listing-details.png) Â· [Owner dashboard](docs/screenshots/my-listings.png) Â· [Mobile](docs/screenshots/mobile.png)
+[Listing details](docs/screenshots/listing-details.png) | [Owner dashboard](docs/screenshots/my-listings.png) | [Mobile](docs/screenshots/mobile.png)
 
 ## Architecture
 
@@ -96,6 +96,6 @@ Verified locally: **89 backend tests, 31 frontend tests, and 5 deployment/demo-t
 - **Storage tradeoff:** a persistent local disk suits a single-instance demo. Multiple instances would require shared/object storage. Thumbnails are not generated yet.
 - **Scope:** no payments, messaging, cloud image storage, or admin roles. This is a portfolio application, not a production commerce service.
 
-## Deployment and portfolio
+## Portfolio
 
-The [deployment guide](docs/DEPLOYMENT.md) covers Docker, Render, estimated costs, persistent storage, fictional demo data, and smoke tests. The [GitHub checklist](docs/PORTFOLIO.md) covers repository creation, pinning, and adding the verified live URL. Local database contents and existing uploaded photos are not included in source control.
+The [GitHub checklist](docs/PORTFOLIO.md) covers repository presentation, screenshots, and pinning the project. Local database contents and existing uploaded photos are not included in source control.

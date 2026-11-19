@@ -24,16 +24,15 @@ git push -u origin main
 
 Replace the username with your actual account. Use GitHub's normal browser/device authentication. Never paste credentials into chat or commit a token.
 
-## After deployment
+## Repository presentation
 
-1. Add **Live demo** with the verified HTTPS URL near the top of the root README.
-2. Set the same URL under repository **About → Website**.
-3. Confirm screenshots render and GitHub Actions passes.
-4. On your profile, select **Customize your pins**, select SportMarket, and save.
-5. Submit your actual GitHub **profile URL** in the internship field asking for it.
+1. Confirm the marketplace, listing details, dashboard, and mobile screenshots render in the README.
+2. Check that GitHub Actions passes and local setup instructions are easy to follow.
+3. On your profile, select **Customize your pins**, select SportMarket, and save.
+4. Submit your actual GitHub **profile URL** in the internship field asking for it.
 
 ## Review walkthrough
 
 Browse → filter → details/gallery → register → login → create with photo → edit → mark sold → delete. Use a second account to explain backend ownership rejection. Be ready to discuss layered services, Flyway, JWT validation, query pagination, and transaction/file cleanup.
 
-Describe your own contribution and any AI assistance accurately. Avoid claiming production scale or unimplemented features. A live demo supports the GitHub review; it is not a requirement stated by the application question.
+Describe your own contribution and any AI assistance accurately. Avoid claiming production scale or unimplemented features. Screenshots, source code, tests, and local setup instructions let reviewers assess the project without a hosted demo.
