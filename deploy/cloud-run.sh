@@ -32,8 +32,20 @@ if [[ -f .env || -f .env.local ]]; then
   export SPORTMARKET_USE_ENV_FILE=true
 else
   echo 'In Neon Connect, copy the connection STRING (not the psql command).'
-  read -r -s -p 'Paste connection string with pooling ON (hidden): ' SPORTMARKET_NEON_POOLED; echo
-  read -r -s -p 'Paste connection string with pooling OFF (hidden): ' SPORTMARKET_NEON_DIRECT; echo
+  read_connection() {
+    if ! IFS= read -r -s -p "$1" "$2" </dev/tty; then
+      echo >&2
+      echo 'Input closed. Use the Cloud Shell editor to save DATABASE_URL and DATABASE_URL_UNPOOLED in private .env.local, then rerun.' >&2
+      return 1
+    fi
+    echo
+    if [[ -z "${!2}" ]]; then
+      echo 'No connection string received. Stopped; do not paste credentials at the shell command prompt.' >&2
+      return 1
+    fi
+  }
+  read_connection 'Paste connection string with pooling ON (hidden): ' SPORTMARKET_NEON_POOLED
+  read_connection 'Paste connection string with pooling OFF (hidden): ' SPORTMARKET_NEON_DIRECT
   export SPORTMARKET_NEON_POOLED SPORTMARKET_NEON_DIRECT
 fi
 
