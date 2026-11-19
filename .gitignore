@@ -14,5 +14,3 @@
 *.pem
 *.key
 uploads/
-.neon
-node_modules/
