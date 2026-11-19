@@ -24,6 +24,20 @@ def illustration(category):
               "Tennis": (125, 148, 64), "Fitness": (69, 86, 104),
               "Hockey": (66, 86, 101), "Baseball": (166, 104, 79), "Other": (181, 127, 45)}
     accent = colors[category]
+    def pentagon(cx, cy, radius, rotation):
+        return [(cx + radius * math.cos(rotation + i * 2 * math.pi / 5),
+                 cy + radius * math.sin(rotation + i * 2 * math.pi / 5)) for i in range(5)]
+    def inside(px, py, polygon):
+        # All panels are convex; consistent edge signs identify their interior.
+        edges = [(b[0] - a[0]) * (py - a[1]) - (b[1] - a[1]) * (px - a[0])
+                 for a, b in zip(polygon, polygon[1:] + polygon[:1])]
+        return all(edge >= 0 for edge in edges) or all(edge <= 0 for edge in edges)
+    rotation = -math.pi / 2
+    center_panel = pentagon(0, 0, 45, rotation)
+    outer_panels = [pentagon(112 * math.cos(rotation + i * 2 * math.pi / 5),
+                            112 * math.sin(rotation + i * 2 * math.pi / 5),
+                            34, rotation + i * 2 * math.pi / 5 + math.pi)
+                    for i in range(5)]
     rows = bytearray()
     for y in range(height):
         rows.append(0)
@@ -48,10 +62,20 @@ def illustration(category):
             elif dx * dx + dy * dy < 128 ** 2:
                 color = accent
                 if category == "Soccer":
-                    angle = math.atan2(dy, dx)
-                    radius = math.hypot(dx, dy)
-                    if radius < 39 or (radius > 78 and math.cos(5 * angle) > 0.65):
-                        color = (238, 239, 224)
+                    # White leather, dark pentagonal panels, fine seams, and spherical shading.
+                    depth = math.sqrt(max(0, 1 - (dx * dx + dy * dy) / 128 ** 2))
+                    light = max(0, min(1, 0.45 + 0.5 * depth - 0.16 * dx / 128 - 0.2 * dy / 128))
+                    shade = int(191 + 62 * light)
+                    color = (shade, shade, max(0, shade - 3))
+                    if any(inside(dx, dy, panel) for panel in [center_panel] + outer_panels):
+                        dark = int(24 + 24 * light)
+                        color = (dark, dark + 5, dark + 7)
+                    else:
+                        for vx, vy in center_panel:
+                            along = (dx * vx + dy * vy) / (45 * 45)
+                            if 1 < along < 2.5 and abs(dx * vy - dy * vx) / 45 < 1.1:
+                                color = (126, 132, 129)
+                                break
                 elif category == "Basketball":
                     if abs(dx) < 4 or abs(dy) < 4 or abs(abs(dx) - (55 + 0.002 * dy * dy)) < 4:
                         color = (66, 47, 35)
